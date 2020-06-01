@@ -1,0 +1,86 @@
+body {
+  padding-top: 5rem;
+}
+
+.em-text{
+  color:green !important;
+}
+
+section{
+ 
+}
+.jumbotron{
+  background: url(../img/bgr.jpg) no-repeat top center;
+  color::#fff;
+  height:500px;
+  background-size:cover;
+  overflow:none;
+  
+}
+.jumbotron img.app-btn{
+  width:40%;
+  margin-right:30px;
+}
+
+.jumbotron p{
+  margin-bottom: 40px;
+}
+.jumbotron h1{
+  margin-top:60px;
+}
+
+
+
+img.demo{
+  width:100%;
+  padding:3px;
+  border:1px solid #ccc;
+}
+
+section#third{
+  background:#1caa98;
+  color:#fff;
+  padding:40px;
+  overflow:none;
+
+}
+
+section#third ul li{
+  font-size: 24px;
+  list-style: inside;
+  line-height: 2.0em;
+
+}
+
+section#title-bar{
+  height:75px;
+  padding:0;
+  margin:0;
+  background-color: rgb(78, 218, 78);
+  color:white;
+}
+
+section#title-bar h1{
+  margin-bottom: 20px;
+}
+
+footer{
+  background:#333;
+  color:#fff;
+  padding:30px 0 20px 0;
+}
+
+footer li{
+  float:left;
+  padding: 0px 10px 0px 0px;
+  list-style:none;
+  
+}
+
+footer a{
+  color:#fff;
+}
+
+footer p{
+  float:right;
+}

@@ -1,0 +1,204 @@
+/*Title: Implement polynomial using CLL and perform 
+  1) Addition of Polynomials 
+  2) Multiplication of polynomials
+  3) Evaluation of polynomial.
+ */
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<malloc.h>
+#include<math.h>
+
+typedef struct cll
+{
+ int data;
+ struct cll *next;
+}node;
+
+node *getnode()
+{
+ node *p;
+ p=(node*)malloc(sizeof(node));
+ p->next=p;
+ return p;
+}
+
+node *insert(node *head)
+{
+ node *temp,*p;
+ p=getnode();
+ p->data=c;
+ 
+ if(head==NULL)
+  head=p;
+ else if(e<head->e)
+ {
+  p->next=head->next;
+  head->next=p;
+  head=p;
+ }
+ else if(e==head->e)
+  head->c+=c;
+ else
+ {
+  temp=head;
+  while(e<=temp->next->e && temp->next!=head)
+   temp=temp->next;
+  if(temp->e==e)
+   temp->c+=c; 
+  else
+  {
+   p->next=temp->next;
+   temp->next=p; 
+  }
+ }
+ return head; 
+}
+
+
+node *create()
+{
+ node *head=NULL,*p;
+ int i,n,e;
+ float c;
+ printf("\nEnter no of terms: ");
+ scanf("%d",&n);
+ for(i=0;i<n;i++)
+ {
+ 
+  printf("\nEnter coef & exp of term[%d]: ",i+1);
+  scanf("%f%d",&c,&e);
+  head=insert(head,c,e);
+ }
+ return head;
+}
+
+void display(node *head)
+{ 
+ node *temp;
+ if(head!=NULL)
+ {
+  temp=head->next;
+  do
+  {
+   if(temp->e!=0)
+    printf("[%.1fX^%d] ",temp->c,temp->e);
+   else
+    printf("[%.1]",temp->c);    
+   temp=temp->next; 
+  }while(temp!=head->next);
+  
+ }
+ else
+  printf("\nPolynomial is Empty\n");
+}
+
+node *add(node *p1,node *p2)
+{
+ node *p3=NULL;
+ node *temp;
+ temp=p1->next;
+ do
+ {
+  p3=insert(p3,temp->c,temp->e);
+  temp=temp->next;
+ }while(temp!=p1->next);
+ 
+ temp=p2->next;
+ do
+ {
+  p3=insert(p3,temp->c,temp->e);
+  temp=temp->next;
+ }while(temp!=p2->next);
+ return p3;
+}
+
+node *mul(node *p1,node *p2)
+{
+ node *p3=NULL;
+ node *temp1=p1->next,*temp2=p2->next;
+ do
+ {
+  do
+  {
+   p3=insert(p3,temp1->c*temp2->c,temp1->e+temp2->e);
+   temp2=temp2->next;
+  }while(temp2!=p2->next);
+
+   temp1=temp1->next;
+ }while(temp1!=p1->next);
+ return p3;
+}
+
+float eval(node *p1)
+{
+ int x;
+ float val=0.0;
+ node *temp=p1->next;
+ printf("\nEnter val of x: ");
+ scanf("%d",&x);
+ do
+ {
+  val=val+(temp->c * pow(x,temp->e) );
+  temp=temp->next;
+ }while(temp!=p1->next);
+ 
+ return val;
+}
+
+int main()
+{
+ int ch;
+ float val;
+ node *p1=NULL,*p2=NULL,*p3;
+ while(1)
+ {
+  system("clear");
+  printf("\nPoly P1: ");
+  display(p1);
+  printf("\nPoly P2: ");
+  display(p2);
+  printf("\n\n*******MENU************");
+  printf("\n1.Create\n2.add\n3.mul");
+  printf("\n4.eval\n5.Exit\nEnter ur choice: ");
+  scanf("%d",&ch);
+  switch(ch)
+  {
+   case 1:
+    printf("\nEnter poly 1: ");
+    p1=create();
+    printf("\n\nEnter poly 2: ");
+    p2=create();
+    break;
+   case 2:
+    
+    p3=add(p1,p2);
+    printf("\n\nAfter ADD: ");
+    display(p3);
+    getchar();
+    break;
+   case 3:
+    p3=mul(p1,p2);
+    printf("\n\nAfter MULTIPLICATION: ");
+    display(p3);
+    getchar();
+    break;
+   case 4:
+    val=eval(p1);
+    printf("\nExpression Evaluation of p1: %f",val);
+    val=eval(p1);
+    printf("\nExpression Evaluation of p2: %f",val);
+    getchar();
+    break;
+   case 5:
+    exit(0);
+  }
+  getchar();
+ }
+ return 0;
+}
+
+
+
+
+//END OF PROGRAM
